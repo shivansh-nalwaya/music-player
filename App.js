@@ -6,8 +6,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Stack key="root">
-          <Scene key="home" component={Home} title="Home" />
+        <Stack key="root" hideNavBar>
+          <Scene key="home" component={Home} />
         </Stack>
       </Router>
     );

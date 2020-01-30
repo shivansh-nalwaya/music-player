@@ -1,26 +1,39 @@
 import React, { Component } from "react";
-import { View, Text } from "native-base";
+import { Text, List, ListItem, Body, Spinner } from "native-base";
+import { ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
 import { request, PERMISSIONS } from "react-native-permissions";
 
 class Home extends Component {
+  state = { loading: true, tracks: [] };
+
   componentDidMount() {
     request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE).then(() => {
-      console.log("Done ok");
       MusicFiles.getAll({})
         .then(tracks => {
-          console.log(tracks);
+          this.setState({ tracks, loading: false });
         })
         .catch(error => {
           console.log(error);
         });
     });
   }
+
   render() {
     return (
-      <View>
-        <Text>Home</Text>
-      </View>
+      <ScrollView>
+        {this.state.loading && <Spinner color="black" />}
+        <List>
+          {this.state.tracks.map((item, index) => (
+            <ListItem key={index}>
+              <Body>
+                <Text>{item.title || item.fileName}</Text>
+                <Text note>{item.album}</Text>
+              </Body>
+            </ListItem>
+          ))}
+        </List>
+      </ScrollView>
     );
   }
 }
