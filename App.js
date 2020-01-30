@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { Router, Stack, Scene } from "react-native-router-flux";
+import { Home } from "./pages";
 
 class App extends Component {
   render() {
     return (
-      <View>
-        <Text>Step One</Text>
-        <Text>
-          Edit <Text>App.js</Text> to change this screen and then come back to
-          see your edits.
-        </Text>
-      </View>
+      <Router>
+        <Stack key="root">
+          <Scene key="home" component={Home} title="Home" />
+        </Stack>
+      </Router>
     );
   }
 }
