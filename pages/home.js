@@ -3,7 +3,7 @@ import { Text, List, ListItem, Body, Spinner } from "native-base";
 import { ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
 import { request, PERMISSIONS } from "react-native-permissions";
-
+const Sound = require("react-native-sound");
 class Home extends Component {
   state = { loading: true, tracks: [] };
 
@@ -11,6 +11,7 @@ class Home extends Component {
     request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE).then(() => {
       MusicFiles.getAll({})
         .then(tracks => {
+          console.log(tracks);
           this.setState({ tracks, loading: false });
         })
         .catch(error => {
@@ -25,7 +26,25 @@ class Home extends Component {
         {this.state.loading && <Spinner color="black" />}
         <List>
           {this.state.tracks.map((item, index) => (
-            <ListItem key={index}>
+            <ListItem
+              key={index}
+              onPress={() => {
+                setTimeout(() => {
+                  this.hello = new Sound(item.path, null, error => {
+                    if (error) {
+                      console.log(error);
+                    }
+                  });
+                });
+                setTimeout(() => {
+                  this.hello.play(success => {
+                    if (!success) {
+                      console.log("Sound did not play!");
+                    }
+                  });
+                }, 100);
+              }}
+            >
               <Body>
                 <Text>{item.title || item.fileName}</Text>
                 <Text note>{item.album}</Text>
