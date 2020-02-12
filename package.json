@@ -1,5 +1,5 @@
 {
-  "name": "MusicPlayer",
+  "name": "music-player",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,6 +10,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.7",
     "native-base": "^2.13.8",
     "react": "16.9.0",
     "react-native": "0.61.5",
@@ -18,6 +20,7 @@
     "react-native-permissions": "^2.0.9",
     "react-native-reanimated": "^1.7.0",
     "react-native-router-flux": "^4.2.0",
+    "react-native-screens": "^2.0.0-beta.2",
     "react-native-sound": "^0.11.0",
     "rn-bottom-drawer": "^1.4.3"
   },
