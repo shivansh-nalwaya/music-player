@@ -46,12 +46,12 @@ class Home extends Component {
           roundedEdges={false}
           startUp={false}
           downDisplay={Dimensions.get("window").height - 100}
-          backgroundColor="#3e3e3e"
+          backgroundColor="lightpink"
           containerHeight={Dimensions.get("window").height}
         >
-          <View>
-            <Text style={{ color: "white" }}>
-              Get directions to your location
+          <View style={{ padding: 10 }}>
+            <Text>
+              Currently playing - {(this.state.tracks[0] || {}).title}
             </Text>
           </View>
         </BottomDrawer>
