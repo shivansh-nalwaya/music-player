@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import { Provider } from "react-redux";
-import store from "./src/reducers";
-import Routes from "./src/routes";
+import { Router, Stack, Scene } from "react-native-router-flux";
+import { Home, Player } from "./src/pages";
 
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Routes />
-      </Provider>
+      <Router>
+        <Stack key="root" hideNavBar>
+          <Scene key="home" component={Home} />
+          <Scene key="player" component={Player} />
+        </Stack>
+      </Router>
     );
   }
 }
