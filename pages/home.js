@@ -11,7 +11,6 @@ class Home extends Component {
     request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE).then(() => {
       MusicFiles.getAll({})
         .then(tracks => {
-          console.log(tracks);
           this.setState({ tracks, loading: false });
         })
         .catch(error => {
