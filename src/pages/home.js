@@ -1,9 +1,8 @@
 import { Body, List, ListItem, Spinner, Text, View } from "native-base";
 import React, { Component } from "react";
-import { ScrollView, Dimensions } from "react-native";
+import { ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
 import { PERMISSIONS, request } from "react-native-permissions";
-import BottomDrawer from "rn-bottom-drawer";
 import { Actions } from "react-native-router-flux";
 
 class Home extends Component {
@@ -23,39 +22,24 @@ class Home extends Component {
 
   render() {
     return (
-      <View>
-        <ScrollView>
-          {this.state.loading && <Spinner color="black" />}
-          <List>
-            {this.state.tracks.map((item, index) => (
-              <ListItem
-                key={index}
-                onPress={() => {
-                  Actions.player({ filepath: item.path });
-                }}
-              >
-                <Body>
-                  <Text>{item.title || item.fileName}</Text>
-                  <Text note>{item.album}</Text>
-                </Body>
-              </ListItem>
-            ))}
-          </List>
-        </ScrollView>
-        <BottomDrawer
-          roundedEdges={false}
-          startUp={false}
-          downDisplay={Dimensions.get("window").height - 100}
-          backgroundColor="lightpink"
-          containerHeight={Dimensions.get("window").height}
-        >
-          <View style={{ padding: 10 }}>
-            <Text>
-              Currently playing - {(this.state.tracks[0] || {}).title}
-            </Text>
-          </View>
-        </BottomDrawer>
-      </View>
+      <ScrollView>
+        {this.state.loading && <Spinner color="black" />}
+        <List>
+          {this.state.tracks.map((item, index) => (
+            <ListItem
+              key={index}
+              onPress={() => {
+                Actions.player({ filepath: item.path });
+              }}
+            >
+              <Body>
+                <Text>{item.title || item.fileName}</Text>
+                <Text note>{item.album}</Text>
+              </Body>
+            </ListItem>
+          ))}
+        </List>
+      </ScrollView>
     );
   }
 }
