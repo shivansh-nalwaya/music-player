@@ -3,7 +3,9 @@ import { Text, List, ListItem, Body, Spinner } from "native-base";
 import { ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
 import { request, PERMISSIONS } from "react-native-permissions";
-const Sound = require("react-native-sound");
+import { playSong } from "../actions/player-action";
+import { connect } from "react-redux";
+
 class Home extends Component {
   state = { loading: true, tracks: [] };
 
@@ -27,22 +29,7 @@ class Home extends Component {
           {this.state.tracks.map((item, index) => (
             <ListItem
               key={index}
-              onPress={() => {
-                setTimeout(() => {
-                  this.hello = new Sound(item.path, null, error => {
-                    if (error) {
-                      console.log(error);
-                    }
-                  });
-                });
-                setTimeout(() => {
-                  this.hello.play(success => {
-                    if (!success) {
-                      console.log("Sound did not play!");
-                    }
-                  });
-                }, 100);
-              }}
+              onPress={() => setTimeout(() => this.props.playSong(item), 100)}
             >
               <Body>
                 <Text>{item.title || item.fileName}</Text>
@@ -56,4 +43,12 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return { isPlaying: state.player.isPlaying };
+};
+
+const mapDispatchToProps = {
+  playSong
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
