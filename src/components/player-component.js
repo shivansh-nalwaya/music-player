@@ -22,11 +22,19 @@ const img_playjumpright = require("../resources/ui_playjumpright.png");
 class Player extends Component {
   componentDidUpdate() {
     if (PlayerModel.playStatus == "STOPPED") {
+      clearInterval(this.timer);
+      this.timer = null;
       if (this.sound) {
         this.sound.release();
         this.sound = null;
       }
       this.play();
+    } else if (PlayerModel.playStatus == "PLAYING" && !this.timer) {
+      this.timer = setInterval(() => {
+        this.sound.getCurrentTime((secs, isPlaying) => {
+          if (isPlaying) PlayerModel.updateTimer(secs);
+        });
+      }, 500);
     }
   }
 
@@ -234,7 +242,7 @@ class Player extends Component {
               // onTouchCancel={() => console.log('onTouchCancel')}
               onValueChange={this.onSliderEditing}
               value={PlayerModel.currentTime}
-              maximumValue={parseInt(PlayerModel.currentSong.duration)}
+              maximumValue={parseInt(PlayerModel.currentSong.duration / 1000)}
               maximumTrackTintColor="gray"
               minimumTrackTintColor="white"
               thumbTintColor="white"
