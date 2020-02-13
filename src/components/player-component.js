@@ -1,6 +1,6 @@
 import Slider from "@react-native-community/slider";
 import { observer } from "mobx-react";
-import { Text, View } from "native-base";
+import { Text, View, Button } from "native-base";
 import React, { Component } from "react";
 import { Dimensions, Image, Platform, TouchableOpacity } from "react-native";
 import Sound from "react-native-sound";
@@ -134,9 +134,7 @@ class Player extends Component {
     );
     return (
       <BottomDrawer
-        ref={e => {
-          this.drawer = e;
-        }}
+        ref={e => (this.drawer = e)}
         roundedEdges={false}
         startUp={false}
         downDisplay={Dimensions.get("window").height - 100}
@@ -147,11 +145,15 @@ class Player extends Component {
       >
         {this.state.drawerCollapsed ? (
           <View style={{ padding: 10 }}>
-            <Text>{PlayerModel.currentSong.title}</Text>
+            <Button onPress={() => this.drawer.openDrawer()}>
+              <Text>{PlayerModel.currentSong.title}</Text>
+            </Button>
           </View>
         ) : (
           <View>
-            <Text>Now playing</Text>
+            <Button onPress={() => this.drawer.closeDrawer()}>
+              <Text>{PlayerModel.currentSong.title}</Text>
+            </Button>
           </View>
         )}
         <View style={{ flex: 1, justifyContent: "center" }}>

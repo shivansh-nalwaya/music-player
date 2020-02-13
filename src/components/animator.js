@@ -36,6 +36,14 @@ export default class Animator extends Component {
     );
   }
 
+  _openDrawer = () => {
+    this._transitionTo(this.props.upPosition, this.props.onExpanded);
+  };
+
+  _closeDrawer = () => {
+    this._transitionTo(this.props.downPosition, this.props.onCollapsed);
+  };
+
   _handlePanResponderMove = (e, gesture) => {
     if (this._swipeInBounds(gesture)) {
       this.position.setValue({ y: this.props.currentPosition.y + gesture.dy });

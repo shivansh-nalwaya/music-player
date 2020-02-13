@@ -51,9 +51,18 @@ export default class BottomDrawer extends Component {
     };
   }
 
+  openDrawer = () => {
+    this.animator._openDrawer();
+  };
+
+  closeDrawer = () => {
+    this.animator._closeDrawer();
+  };
+
   render() {
     return (
       <Animator
+        ref={ref => (this.animator = ref)}
         currentPosition={this.state.currentPosition}
         setCurrentPosition={position => this.setCurrentPosition(position)}
         toggleThreshold={this.TOGGLE_THRESHOLD}
