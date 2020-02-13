@@ -1,19 +1,17 @@
+import Slider from "@react-native-community/slider";
+import { observer } from "mobx-react";
 import { Text, View } from "native-base";
 import React, { Component } from "react";
 import {
+  Alert,
   Dimensions,
   Image,
-  TouchableOpacity,
   Platform,
-  Alert
+  TouchableOpacity
 } from "react-native";
-import Slider from "@react-native-community/slider";
-import BottomDrawer from "rn-bottom-drawer";
-import { observer } from "mobx-react";
-import PlayerModel from "../models/player-model";
-
 import Sound from "react-native-sound";
-import { when } from "mobx";
+import BottomDrawer from "rn-bottom-drawer";
+import PlayerModel from "../models/player-model";
 
 const img_speaker = require("../resources/ui_speaker.png");
 const img_pause = require("../resources/ui_pause.png");
@@ -22,17 +20,13 @@ const img_playjumpleft = require("../resources/ui_playjumpleft.png");
 const img_playjumpright = require("../resources/ui_playjumpright.png");
 
 class Player extends Component {
-  componentDidMount() {
-    when(() => !!PlayerModel.currentSong, this.play);
-  }
-
-  componentWillUnmount() {
-    if (this.sound) {
-      this.sound.release();
-      this.sound = null;
-    }
-    if (this.timeout) {
-      clearInterval(this.timeout);
+  componentDidUpdate() {
+    if (PlayerModel.playStatus == "STOPPED") {
+      if (this.sound) {
+        this.sound.release();
+        this.sound = null;
+      }
+      this.play();
     }
   }
 
@@ -52,26 +46,26 @@ class Player extends Component {
   };
 
   play = async () => {
-    if (this.sound) {
-      this.sound.play(this.playComplete);
+    if (PlayerModel.playStatus == "PAUSED") {
       PlayerModel.playStatus = "PLAYING";
-    } else {
-      if (PlayerModel.currentSong) {
-        const filepath = PlayerModel.currentSong.path;
-        console.log("[Play]", filepath);
+      this.sound.play(this.playComplete);
+      return;
+    }
+    if (PlayerModel.currentSong) {
+      const filepath = PlayerModel.currentSong.path;
+      console.log("[Play]", filepath);
 
-        this.sound = new Sound(filepath, "", error => {
-          if (error) {
-            console.log("failed to load the sound", error);
-            Alert.alert("Notice", "audio file error. (Error code : 1)");
-            PlayerModel.playStatus = "PAUSED";
-          } else {
-            PlayerModel.playStatus = "PLAYING";
-            PlayerModel.updateTimer(0);
-            this.sound.play(this.playComplete);
-          }
-        });
-      }
+      this.sound = new Sound(filepath, "", error => {
+        if (error) {
+          console.log("failed to load the sound", error);
+          Alert.alert("Notice", "audio file error. (Error code : 1)");
+          PlayerModel.playStatus = "PAUSED";
+        } else {
+          PlayerModel.playStatus = "PLAYING";
+          PlayerModel.updateTimer(0);
+          this.sound.play(this.playComplete);
+        }
+      });
     }
   };
 

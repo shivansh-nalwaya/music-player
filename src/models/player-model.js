@@ -7,6 +7,7 @@ class PlayerClass {
 
   setSong(song) {
     this.currentSong = song;
+    this.playStatus = "STOPPED";
   }
 
   play() {
