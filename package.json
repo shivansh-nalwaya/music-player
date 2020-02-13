@@ -22,8 +22,7 @@
     "react-native-reanimated": "^1.7.0",
     "react-native-router-flux": "^4.2.0",
     "react-native-screens": "^2.0.0-beta.2",
-    "react-native-sound": "^0.11.0",
-    "rn-bottom-drawer": "^1.4.3"
+    "react-native-sound": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

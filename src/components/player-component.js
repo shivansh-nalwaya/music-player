@@ -2,16 +2,10 @@ import Slider from "@react-native-community/slider";
 import { observer } from "mobx-react";
 import { Text, View } from "native-base";
 import React, { Component } from "react";
-import {
-  Alert,
-  Dimensions,
-  Image,
-  Platform,
-  TouchableOpacity
-} from "react-native";
+import { Dimensions, Image, Platform, TouchableOpacity } from "react-native";
 import Sound from "react-native-sound";
-import BottomDrawer from "rn-bottom-drawer";
 import PlayerModel from "../models/player-model";
+import BottomDrawer from "./bottom-drawer";
 
 const img_speaker = require("../resources/ui_speaker.png");
 const img_pause = require("../resources/ui_pause.png");
@@ -20,6 +14,8 @@ const img_playjumpleft = require("../resources/ui_playjumpleft.png");
 const img_playjumpright = require("../resources/ui_playjumpright.png");
 
 class Player extends Component {
+  state = { drawerCollapsed: true };
+
   componentDidUpdate() {
     if (PlayerModel.playStatus == "STOPPED") {
       clearInterval(this.timer);
@@ -138,15 +134,26 @@ class Player extends Component {
     );
     return (
       <BottomDrawer
+        ref={e => {
+          this.drawer = e;
+        }}
         roundedEdges={false}
         startUp={false}
         downDisplay={Dimensions.get("window").height - 100}
         backgroundColor="lightpink"
         containerHeight={Dimensions.get("window").height}
+        onExpanded={() => this.setState({ drawerCollapsed: false })}
+        onCollapsed={() => this.setState({ drawerCollapsed: true })}
       >
-        <View style={{ padding: 10 }}>
-          <Text>{PlayerModel.currentSong.title}</Text>
-        </View>
+        {this.state.drawerCollapsed ? (
+          <View style={{ padding: 10 }}>
+            <Text>{PlayerModel.currentSong.title}</Text>
+          </View>
+        ) : (
+          <View>
+            <Text>Now playing</Text>
+          </View>
+        )}
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Image
             source={img_speaker}
