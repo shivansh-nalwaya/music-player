@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
 import { PERMISSIONS, request } from "react-native-permissions";
-import { Actions } from "react-native-router-flux";
+import PlayerModel from "../models/player-model";
 
 class Home extends Component {
   state = { loading: true, tracks: [] };
@@ -29,7 +29,7 @@ class Home extends Component {
             <ListItem
               key={index}
               onPress={() => {
-                Actions.player({ filepath: item.path });
+                PlayerModel.setSong(item);
               }}
             >
               <Body>

@@ -1,7 +1,7 @@
 import { action, decorate, observable } from "mobx";
 
 class PlayerClass {
-  currentSong = {};
+  currentSong = null;
   playStatus = "STOPPED";
   currentTime = 0;
 
