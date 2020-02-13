@@ -25,7 +25,11 @@ class Player extends Component {
         this.sound = null;
       }
       this.play();
-    } else if (PlayerModel.playStatus == "PLAYING" && !this.timer) {
+    } else if (
+      this.sound &&
+      PlayerModel.playStatus == "PLAYING" &&
+      !this.timer
+    ) {
       this.timer = setInterval(() => {
         this.sound.getCurrentTime((secs, isPlaying) => {
           if (isPlaying) PlayerModel.updateTimer(secs);
