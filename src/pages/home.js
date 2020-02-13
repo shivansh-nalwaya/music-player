@@ -10,7 +10,7 @@ class Home extends Component {
 
   componentDidMount() {
     request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE).then(() => {
-      MusicFiles.getAll({})
+      MusicFiles.getAll({ cover: true, blurred: true })
         .then(tracks => {
           this.setState({ tracks, loading: false });
         })

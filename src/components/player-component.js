@@ -61,12 +61,10 @@ class Player extends Component {
     }
     if (PlayerModel.currentSong) {
       const filepath = PlayerModel.currentSong.path;
-      console.log("[Play]", filepath);
 
       this.sound = new Sound(filepath, "", error => {
         if (error) {
           console.log("failed to load the sound", error);
-          Alert.alert("Notice", "audio file error. (Error code : 1)");
           PlayerModel.playStatus = "PAUSED";
         } else {
           PlayerModel.playStatus = "PLAYING";
@@ -83,7 +81,6 @@ class Player extends Component {
         console.log("successfully finished playing");
       } else {
         console.log("playback failed due to audio decoding errors");
-        Alert.alert("Notice", "audio file error. (Error code : 2)");
       }
       PlayerModel.playStatus = "STOPPED";
       PlayerModel.updateTimer(0);
@@ -236,10 +233,7 @@ class Player extends Component {
             </Text>
             <Slider
               onTouchStart={this.onSliderEditStart}
-              // onTouchMove={() => console.log('onTouchMove')}
               onTouchEnd={this.onSliderEditEnd}
-              // onTouchEndCapture={() => console.log('onTouchEndCapture')}
-              // onTouchCancel={() => console.log('onTouchCancel')}
               onValueChange={this.onSliderEditing}
               value={PlayerModel.currentTime}
               maximumValue={parseInt(PlayerModel.currentSong.duration / 1000)}
