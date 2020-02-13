@@ -144,17 +144,16 @@ class Player extends Component {
         onCollapsed={() => this.setState({ drawerCollapsed: true })}
       >
         {this.state.drawerCollapsed ? (
-          <View style={{ padding: 10 }}>
-            <Button onPress={() => this.drawer.openDrawer()}>
-              <Text>{PlayerModel.currentSong.title}</Text>
-            </Button>
-          </View>
+          <TouchableOpacity
+            onPress={() => this.drawer.openDrawer()}
+            style={{ padding: 10 }}
+          >
+            <Text>{PlayerModel.currentSong.title}</Text>
+          </TouchableOpacity>
         ) : (
-          <View>
-            <Button onPress={() => this.drawer.closeDrawer()}>
-              <Text>{PlayerModel.currentSong.title}</Text>
-            </Button>
-          </View>
+          <TouchableOpacity onPress={() => this.drawer.closeDrawer()}>
+            <Text>{PlayerModel.currentSong.title}</Text>
+          </TouchableOpacity>
         )}
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Image

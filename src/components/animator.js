@@ -9,7 +9,9 @@ export default class Animator extends Component {
     super(props);
     this.position = new Animated.ValueXY(this.props.currentPosition);
     this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (event, gesture) => {
+        return Math.abs(gesture.dx) > 5 || Math.abs(gesture.dy) > 5;
+      },
       onPanResponderMove: this._handlePanResponderMove,
       onPanResponderRelease: this._handlePanResponderRelease
     });
