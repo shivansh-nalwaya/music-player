@@ -136,13 +136,16 @@ class Player extends Component {
     const durationString = this.getAudioTimeString(
       parseInt(PlayerModel.currentSong.duration / 1000)
     );
+    const coverImg = PlayerModel.currentSong.cover
+      ? { uri: PlayerModel.currentSong.cover }
+      : img_speaker;
     return (
       <BottomDrawer
         ref={e => (this.drawer = e)}
         roundedEdges={false}
         startUp={false}
         downDisplay={Dimensions.get("window").height - 100}
-        backgroundColor="lightpink"
+        backgroundColor="#343434"
         containerHeight={Dimensions.get("window").height}
         onExpanded={() => this.setState({ drawerCollapsed: false })}
         onCollapsed={() => this.setState({ drawerCollapsed: true })}
@@ -150,9 +153,24 @@ class Player extends Component {
         {this.state.drawerCollapsed ? (
           <TouchableOpacity
             onPress={() => this.drawer.openDrawer()}
-            style={{ padding: 10 }}
+            style={{
+              padding: 18,
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
           >
-            <Text>{PlayerModel.currentSong.title}</Text>
+            <View>
+              <Text note>Now Playing</Text>
+              <Text style={{ color: "white" }}>
+                {PlayerModel.currentSong.title}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={this.pause}
+              style={{ marginHorizontal: 20 }}
+            >
+              <Image source={img_pause} style={{ width: 30, height: 30 }} />
+            </TouchableOpacity>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={() => this.drawer.closeDrawer()}>
@@ -161,7 +179,7 @@ class Player extends Component {
         )}
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Image
-            source={img_speaker}
+            source={coverImg}
             style={{
               width: 150,
               height: 150,
