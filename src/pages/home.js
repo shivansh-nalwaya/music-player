@@ -1,17 +1,7 @@
-import {
-  Body,
-  List,
-  ListItem,
-  Spinner,
-  Text,
-  View,
-  Left,
-  Thumbnail
-} from "native-base";
+import { Body, Left, List, ListItem, Spinner, Text, Thumbnail } from "native-base";
 import React, { Component } from "react";
-import { ScrollView, PermissionsAndroid } from "react-native";
+import { PermissionsAndroid, ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
-import { PERMISSIONS, request } from "react-native-permissions";
 import PlayerModel from "../models/player-model";
 
 class Home extends Component {

@@ -1,11 +1,12 @@
 import Slider from "@react-native-community/slider";
 import { observer } from "mobx-react";
-import { Text, View, Button } from "native-base";
+import { Text, View } from "native-base";
 import React, { Component } from "react";
 import { Dimensions, Image, Platform, TouchableOpacity } from "react-native";
 import Sound from "react-native-sound";
 import PlayerModel from "../models/player-model";
 import BottomDrawer from "./bottom-drawer";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 const img_speaker = require("../resources/ui_speaker.png");
 const img_pause = require("../resources/ui_pause.png");
@@ -165,12 +166,18 @@ class Player extends Component {
                 {PlayerModel.currentSong.title}
               </Text>
             </View>
-            <TouchableOpacity
-              onPress={this.pause}
-              style={{ marginHorizontal: 20 }}
-            >
-              <Image source={img_pause} style={{ width: 30, height: 30 }} />
-            </TouchableOpacity>
+            <AnimatedCircularProgress
+              size={40}
+              width={2}
+              rotation={0}
+              fill={parseInt(
+                ((PlayerModel.currentTime * 1000) /
+                  PlayerModel.currentSong.duration) *
+                  100
+              )}
+              tintColor="#00e0ff"
+              backgroundColor="#3d5875"
+            ></AnimatedCircularProgress>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={() => this.drawer.closeDrawer()}>
