@@ -143,10 +143,10 @@ class Player extends Component {
     return (
       <BottomDrawer
         ref={e => (this.drawer = e)}
-        roundedEdges={false}
+        roundedEdges={this.state.drawerCollapsed}
         startUp={false}
         downDisplay={Dimensions.get("window").height - 100}
-        backgroundColor="#343434"
+        backgroundColor="#000000"
         containerHeight={Dimensions.get("window").height}
         onExpanded={() => this.setState({ drawerCollapsed: false })}
         onCollapsed={() => this.setState({ drawerCollapsed: true })}
@@ -166,18 +166,32 @@ class Player extends Component {
                 {PlayerModel.currentSong.title}
               </Text>
             </View>
-            <AnimatedCircularProgress
-              size={40}
-              width={2}
-              rotation={0}
-              fill={parseInt(
-                ((PlayerModel.currentTime * 1000) /
-                  PlayerModel.currentSong.duration) *
-                  100
-              )}
-              tintColor="#00e0ff"
-              backgroundColor="#3d5875"
-            ></AnimatedCircularProgress>
+            <TouchableOpacity
+              onPress={
+                PlayerModel.playStatus == "PAUSED" ? this.play : this.pause
+              }
+            >
+              <AnimatedCircularProgress
+                size={40}
+                width={2}
+                rotation={0}
+                children={() => (
+                  <Image
+                    source={
+                      PlayerModel.playStatus == "PAUSED" ? img_play : img_pause
+                    }
+                    style={{ width: 15, height: 15 }}
+                  />
+                )}
+                fill={parseInt(
+                  ((PlayerModel.currentTime * 1000) /
+                    PlayerModel.currentSong.duration) *
+                    100
+                )}
+                tintColor="#00e0ff"
+                backgroundColor="#3d5875"
+              ></AnimatedCircularProgress>
+            </TouchableOpacity>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={() => this.drawer.closeDrawer()}>
