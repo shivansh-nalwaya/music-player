@@ -7,6 +7,7 @@ import Sound from "react-native-sound";
 import PlayerModel from "../models/player-model";
 import BottomDrawer from "./bottom-drawer";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import LottieView from "lottie-react-native";
 
 const img_speaker = require("../resources/ui_speaker.png");
 const img_pause = require("../resources/ui_pause.png");
@@ -58,6 +59,7 @@ class Player extends Component {
     if (PlayerModel.playStatus == "PAUSED") {
       PlayerModel.playStatus = "PLAYING";
       this.sound.play(this.playComplete);
+      this.animation.play();
       return;
     }
     if (PlayerModel.currentSong) {
@@ -92,8 +94,9 @@ class Player extends Component {
   pause = () => {
     if (this.sound) {
       this.sound.pause();
+      PlayerModel.playStatus = "PAUSED";
+      this.animation.play();
     }
-    PlayerModel.playStatus = "PAUSED";
   };
 
   jumpPrev15Seconds = () => {
@@ -208,70 +211,23 @@ class Player extends Component {
               alignSelf: "center"
             }}
           />
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              marginVertical: 15
-            }}
+          <TouchableOpacity
+            onPress={
+              PlayerModel.playStatus == "PLAYING" ? this.pause : this.play
+            }
+            style={{ alignItems: "center" }}
           >
-            <TouchableOpacity
-              onPress={this.jumpPrev15Seconds}
-              style={{ justifyContent: "center" }}
-            >
-              <Image
-                source={img_playjumpleft}
-                style={{ width: 30, height: 30 }}
-              />
-              <Text
-                style={{
-                  position: "absolute",
-                  alignSelf: "center",
-                  marginTop: 1,
-                  color: "white",
-                  fontSize: 12
-                }}
-              >
-                15
-              </Text>
-            </TouchableOpacity>
-            {PlayerModel.playStatus == "PLAYING" && (
-              <TouchableOpacity
-                onPress={this.pause}
-                style={{ marginHorizontal: 20 }}
-              >
-                <Image source={img_pause} style={{ width: 30, height: 30 }} />
-              </TouchableOpacity>
-            )}
-            {PlayerModel.playStatus == "PAUSED" && (
-              <TouchableOpacity
-                onPress={this.play}
-                style={{ marginHorizontal: 20 }}
-              >
-                <Image source={img_play} style={{ width: 30, height: 30 }} />
-              </TouchableOpacity>
-            )}
-            <TouchableOpacity
-              onPress={this.jumpNext15Seconds}
-              style={{ justifyContent: "center" }}
-            >
-              <Image
-                source={img_playjumpright}
-                style={{ width: 30, height: 30 }}
-              />
-              <Text
-                style={{
-                  position: "absolute",
-                  alignSelf: "center",
-                  marginTop: 1,
-                  color: "white",
-                  fontSize: 12
-                }}
-              >
-                15
-              </Text>
-            </TouchableOpacity>
-          </View>
+            <LottieView
+              loop={false}
+              speed={PlayerModel.playStatus == "PLAYING" ? 1 : -1}
+              progress={1}
+              ref={animation => {
+                this.animation = animation;
+              }}
+              style={{ width: 100, height: 100 }}
+              source={require("../resources/animation.json")}
+            />
+          </TouchableOpacity>
           <View
             style={{
               marginVertical: 15,

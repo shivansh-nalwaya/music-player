@@ -1,4 +1,12 @@
-import { Body, Left, List, ListItem, Spinner, Text, Thumbnail } from "native-base";
+import {
+  Body,
+  Left,
+  List,
+  ListItem,
+  Spinner,
+  Text,
+  Thumbnail
+} from "native-base";
 import React, { Component } from "react";
 import { PermissionsAndroid, ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
