@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Router, Stack, Scene } from "react-native-router-flux";
 import { Home } from "./src/pages";
-import PlayerComponent from "./src/components/player-component";
+import PlayerComponent from "./src/components/player";
 import { Container } from "native-base";
 
 class App extends Component {
