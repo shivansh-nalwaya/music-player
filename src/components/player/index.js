@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Dimensions } from "react-native";
 import Sound from "react-native-sound";
 import PlayerModel from "../../models/player-model";
-import BottomDrawer from "../bottom-drawer/wrapper";
+import BottomDrawer from "../bottom-drawer";
 import FullPlayer from "./full-player";
 import MiniPlayer from "./mini-player";
 
