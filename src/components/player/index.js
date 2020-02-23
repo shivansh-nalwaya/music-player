@@ -119,7 +119,7 @@ class Player extends Component {
         roundedEdges={this.state.drawerCollapsed}
         startUp={false}
         downDisplay={Dimensions.get("window").height - 100}
-        backgroundColor="#000000"
+        backgroundColor="#292929"
         containerHeight={Dimensions.get("window").height}
         onExpanded={() => this.setState({ drawerCollapsed: false })}
         onCollapsed={() => this.setState({ drawerCollapsed: true })}

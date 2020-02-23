@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { Icon, Text } from "native-base";
 
 class Header extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Icon name="home" type="FontAwesome5" style={styles.icon} />
+        <StatusBar color="#151515" />
+        <Icon name="bars" type="FontAwesome5" style={styles.icon} />
         <Text style={styles.text}>Home</Text>
         <Icon name="search" type="FontAwesome5" style={styles.icon} />
       </View>
@@ -17,8 +18,8 @@ class Header extends Component {
 const styles = StyleSheet.create({
   container: {
     height: "8%",
-    paddingHorizontal: "8%",
-    backgroundColor: "black",
+    paddingHorizontal: "6%",
+    backgroundColor: "#151515",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",

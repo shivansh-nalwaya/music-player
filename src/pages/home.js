@@ -48,12 +48,15 @@ class Home extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{ backgroundColor: "#151515", height: "100%" }}
+      >
         {this.state.loading && <Spinner color="black" />}
         <List>
           {this.state.tracks.map((item, index) => (
             <ListItem
               thumbnail
+              noBorder
               key={index}
               onPress={() => {
                 PlayerModel.setSong(item);
@@ -69,7 +72,9 @@ class Home extends Component {
                 />
               </Left>
               <Body>
-                <Text>{_.truncate(item.title || item.fileName, 30)}</Text>
+                <Text style={{ color: "white" }}>
+                  {_.truncate(item.title || item.fileName, 30)}
+                </Text>
                 <Text note>{_.truncate(item.album || "Unknown album")}</Text>
               </Body>
               <Right>

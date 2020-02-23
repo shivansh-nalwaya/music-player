@@ -45,9 +45,9 @@ class FullPlayer extends Component {
     return (
       <View style={{ flex: 1, justifyContent: "center" }}>
         <View style={styles.container}>
-          <Icon name="home" type="FontAwesome5" style={styles.icon} />
+          <Icon name="arrow-left" type="FontAwesome5" style={styles.icon} />
           <Text style={styles.text}>Now Playing</Text>
-          <Icon name="search" type="FontAwesome5" style={styles.icon} />
+          <Icon name="times" type="FontAwesome5" style={styles.icon} />
         </View>
         <Image
           source={coverImg}
@@ -110,8 +110,8 @@ class FullPlayer extends Component {
 const styles = StyleSheet.create({
   container: {
     height: "8%",
-    paddingHorizontal: "8%",
-    backgroundColor: "black",
+    paddingHorizontal: "6%",
+    backgroundColor: "#292929",
     display: "flex",
     position: "absolute",
     top: 0,
