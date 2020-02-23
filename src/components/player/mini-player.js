@@ -30,7 +30,7 @@ class MiniPlayer extends Component {
       >
         <View>
           <Text note>Now Playing</Text>
-          <Text style={{ color: "white" }}>
+          <Text style={{ color: "orange" }}>
             {PlayerModel.currentSong.title}
           </Text>
         </View>

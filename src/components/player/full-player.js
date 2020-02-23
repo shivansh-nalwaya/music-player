@@ -1,9 +1,9 @@
 import Slider from "@react-native-community/slider";
 import LottieView from "lottie-react-native";
 import { observer } from "mobx-react";
-import { Text, View } from "native-base";
+import { Text, View, Icon } from "native-base";
 import React, { Component } from "react";
-import { Image, Platform, TouchableOpacity } from "react-native";
+import { Image, Platform, TouchableOpacity, StyleSheet } from "react-native";
 import PlayerModel from "../../models/player-model";
 
 const AnimationData = require("../../resources/animation.json");
@@ -44,6 +44,11 @@ class FullPlayer extends Component {
       : DefaultCover;
     return (
       <View style={{ flex: 1, justifyContent: "center" }}>
+        <View style={styles.container}>
+          <Icon name="home" type="FontAwesome5" style={styles.icon} />
+          <Text style={styles.text}>Now Playing</Text>
+          <Icon name="search" type="FontAwesome5" style={styles.icon} />
+        </View>
         <Image
           source={coverImg}
           style={{
@@ -101,5 +106,28 @@ class FullPlayer extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: "8%",
+    paddingHorizontal: "8%",
+    backgroundColor: "black",
+    display: "flex",
+    position: "absolute",
+    top: 0,
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  icon: {
+    color: "orange"
+  },
+  text: {
+    fontSize: 20,
+    textTransform: "uppercase",
+    color: "orange"
+  }
+});
 
 export default observer(FullPlayer);
