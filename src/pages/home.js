@@ -5,8 +5,10 @@ import {
   ListItem,
   Spinner,
   Text,
-  Thumbnail
+  Thumbnail,
+  Right
 } from "native-base";
+import _ from "lodash";
 import React, { Component } from "react";
 import { PermissionsAndroid, ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
@@ -14,6 +16,20 @@ import PlayerModel from "../models/player-model";
 
 class Home extends Component {
   state = { loading: true, tracks: [] };
+
+  getAudioTimeString(seconds) {
+    const h = parseInt(seconds / (60 * 60));
+    const m = parseInt((seconds % (60 * 60)) / 60);
+    const s = parseInt(seconds % 60);
+
+    return [
+      h == 0 ? null : h < 10 ? "0" + h : h,
+      m < 10 ? "0" + m : m,
+      s < 10 ? "0" + s : s
+    ]
+      .filter(Boolean)
+      .join(":");
+  }
 
   componentDidMount() {
     PermissionsAndroid.requestMultiple([
@@ -53,9 +69,14 @@ class Home extends Component {
                 />
               </Left>
               <Body>
-                <Text>{item.title || item.fileName}</Text>
-                <Text note>{item.album || "Unknown album"}</Text>
+                <Text>{_.truncate(item.title || item.fileName, 30)}</Text>
+                <Text note>{_.truncate(item.album || "Unknown album")}</Text>
               </Body>
+              <Right>
+                <Text note>
+                  {this.getAudioTimeString(item.duration / 1000)}
+                </Text>
+              </Right>
             </ListItem>
           ))}
         </List>
