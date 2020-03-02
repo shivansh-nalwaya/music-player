@@ -36,7 +36,7 @@ class Home extends Component {
       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
     ]).then(() => {
-      MusicFiles.getAll({ cover: true, blurred: true })
+      MusicFiles.getAll({ cover: true })
         .then(tracks => {
           this.setState({ tracks, loading: false });
         })

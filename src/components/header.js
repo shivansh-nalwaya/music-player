@@ -7,7 +7,12 @@ class Header extends Component {
     return (
       <View style={styles.container}>
         <StatusBar color="#151515" />
-        <Icon name="bars" type="FontAwesome5" style={styles.icon} />
+        <Icon
+          name="bars"
+          type="FontAwesome5"
+          style={styles.icon}
+          onPress={this.props.openDrawer}
+        />
         <Text style={styles.text}>Home</Text>
         <Icon name="search" type="FontAwesome5" style={styles.icon} />
       </View>
@@ -26,7 +31,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   icon: {
-    color: "orange"
+    color: "orange",
+    fontSize: 22
   },
   text: {
     fontSize: 20,
