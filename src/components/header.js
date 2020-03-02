@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar color="#151515" />
+        <StatusBar backgroundColor="#151515" />
         <Icon
           name="bars"
           type="FontAwesome5"

@@ -34,7 +34,15 @@ class App extends Component {
           openDrawerOffset={100}
           panOpenMask={0.2}
           negotiatePan
-          styles={{ main: { backgroundColor: "black" } }}
+          styles={{
+            main: { backgroundColor: "black", borderRightWidth: 0 },
+            drawer: {
+              borderRightWidth: 0,
+              shadowColor: "#ffffff",
+              shadowOpacity: 0.8,
+              shadowRadius: 3
+            }
+          }}
         >
           <Header openDrawer={this.openDrawer} closeDrawer={this.closeDrawer} />
           <Router>
