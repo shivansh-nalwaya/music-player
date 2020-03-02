@@ -52,12 +52,18 @@ class FullPlayer extends Component {
         <Image
           source={coverImg}
           style={{
-            width: 150,
-            height: 150,
+            width: 300,
+            height: 300,
             marginBottom: 15,
             alignSelf: "center"
           }}
         />
+        <Text style={{ color: "white", alignSelf: "center", fontSize: 20 }}>
+          {PlayerModel.currentSong.title || PlayerModel.currentSong.fileName}
+        </Text>
+        <Text note style={{ alignSelf: "center", fontSize: 18 }}>
+          {PlayerModel.currentSong.album || PlayerModel.currentSong.artist}
+        </Text>
         <TouchableOpacity
           onPress={PlayerModel.playStatus == "PLAYING" ? this.pause : this.play}
           style={{ alignItems: "center" }}
