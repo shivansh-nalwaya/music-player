@@ -7,14 +7,20 @@ class CustomDrawer extends Component {
     return (
       <View style={styles.drawerContainer}>
         <List>
-          <ListItem onPress={this.props.closeDrawer}>
-            <Text style={styles.drawerText}>Products</Text>
+          <ListItem last onPress={this.props.closeDrawer}>
+            <Text style={styles.drawerText}>Home</Text>
           </ListItem>
-          <ListItem onPress={this.props.closeDrawer}>
-            <Text style={styles.drawerText}>Orders</Text>
+          <ListItem last onPress={this.props.closeDrawer}>
+            <Text style={styles.drawerText}>Tracks</Text>
           </ListItem>
-          <ListItem>
-            <Text style={styles.drawerText}>Reports</Text>
+          <ListItem last>
+            <Text style={styles.drawerText}>Albums</Text>
+          </ListItem>
+          <ListItem last>
+            <Text style={styles.drawerText}>Artists</Text>
+          </ListItem>
+          <ListItem last>
+            <Text style={styles.drawerText}>Playlists</Text>
           </ListItem>
         </List>
       </View>
@@ -27,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     minHeight: Dimensions.get("window").height
   },
-  drawerText: { color: "white", fontSize: 18 }
+  drawerText: { color: "white", fontSize: 19 }
 });
 
 export default CustomDrawer;

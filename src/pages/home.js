@@ -51,7 +51,7 @@ class Home extends Component {
       <ScrollView
         contentContainerStyle={{ backgroundColor: "#151515", height: "100%" }}
       >
-        {this.state.loading && <Spinner color="black" />}
+        {this.state.loading && <Spinner color="orange" />}
         <List>
           {this.state.tracks.map((item, index) => (
             <ListItem
