@@ -128,13 +128,19 @@ class Player extends Component {
           <MiniPlayer
             play={this.play}
             pause={this.pause}
-            onPress={() => this.drawer.openDrawer()}
+            onPress={() => {
+              this.drawer.openDrawer();
+              this.setState({ drawerCollapsed: false });
+            }}
           />
         )}
         <FullPlayer
           play={this.play}
           pause={this.pause}
-          onPress={() => this.drawer.openDrawer()}
+          onPress={() => {
+            this.drawer.closeDrawer();
+            this.setState({ drawerCollapsed: true });
+          }}
         />
       </BottomDrawer>
     );

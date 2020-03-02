@@ -4,6 +4,7 @@ import { Text, View } from "native-base";
 import React, { Component } from "react";
 import { TouchableOpacity } from "react-native";
 import PlayerModel from "../../models/player-model";
+import _ from "lodash";
 
 const AnimationData = require("../../resources/animation.json");
 
@@ -31,7 +32,10 @@ class MiniPlayer extends Component {
         <View>
           <Text note>Now Playing</Text>
           <Text style={{ color: "orange" }}>
-            {PlayerModel.currentSong.title || PlayerModel.currentSong.fileName}
+            {_.truncate(
+              PlayerModel.currentSong.title || PlayerModel.currentSong.fileName,
+              50
+            )}
           </Text>
         </View>
         <TouchableOpacity

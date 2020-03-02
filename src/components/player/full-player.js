@@ -45,9 +45,25 @@ class FullPlayer extends Component {
     return (
       <View style={{ flex: 1, justifyContent: "center" }}>
         <View style={styles.container}>
-          <Icon name="arrow-left" type="FontAwesome5" style={styles.icon} />
+          <Icon
+            name="arrow-left"
+            type="FontAwesome5"
+            style={styles.icon}
+            onPress={this.props.onPress}
+          />
           <Text style={styles.text}>Now Playing</Text>
-          <Icon name="times" type="FontAwesome5" style={styles.icon} />
+          <Icon
+            name="times"
+            type="FontAwesome5"
+            style={styles.icon}
+            onPress={() => {
+              this.props.onPress();
+              PlayerModel.playStatus = "STOPPED";
+              PlayerModel.currentSong = null;
+              PlayerModel.currentTime = 0;
+              this.props.pause();
+            }}
+          />
         </View>
         <Image
           source={coverImg}
