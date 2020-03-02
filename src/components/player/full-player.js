@@ -62,7 +62,7 @@ class FullPlayer extends Component {
           {PlayerModel.currentSong.title || PlayerModel.currentSong.fileName}
         </Text>
         <Text note style={{ alignSelf: "center", fontSize: 18 }}>
-          {PlayerModel.currentSong.album || PlayerModel.currentSong.artist}
+          {PlayerModel.currentSong.album || "Unknown Album"}
         </Text>
         <TouchableOpacity
           onPress={PlayerModel.playStatus == "PLAYING" ? this.pause : this.play}

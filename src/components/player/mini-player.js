@@ -31,7 +31,7 @@ class MiniPlayer extends Component {
         <View>
           <Text note>Now Playing</Text>
           <Text style={{ color: "orange" }}>
-            {PlayerModel.currentSong.title}
+            {PlayerModel.currentSong.title || PlayerModel.currentSong.fileName}
           </Text>
         </View>
         <TouchableOpacity
