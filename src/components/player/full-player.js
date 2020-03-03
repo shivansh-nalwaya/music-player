@@ -106,9 +106,7 @@ class FullPlayer extends Component {
             {currentTimeString}
           </Text>
           <Slider
-            onTouchStart={this.onSliderEditStart}
-            onTouchEnd={this.onSliderEditEnd}
-            onValueChange={this.onSliderEditing}
+            onValueChange={this.props.onSliderEditing}
             value={PlayerModel.currentTime}
             maximumValue={parseInt(PlayerModel.currentSong.duration / 1000)}
             maximumTrackTintColor="gray"

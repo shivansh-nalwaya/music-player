@@ -137,6 +137,7 @@ class Player extends Component {
         <FullPlayer
           play={this.play}
           pause={this.pause}
+          onSliderEditing={this.onSliderEditing}
           onPress={() => {
             this.drawer.closeDrawer();
             this.setState({ drawerCollapsed: true });
