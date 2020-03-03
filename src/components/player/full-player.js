@@ -6,18 +6,20 @@ import React, { Component } from "react";
 import { Image, Platform, TouchableOpacity, StyleSheet } from "react-native";
 import PlayerModel from "../../models/player-model";
 
-const AnimationData = require("../../resources/play-pause-animation.json");
+const PlayPauseAnimation = require("../../resources/play-pause.json");
+const RewindAnimation = require("../../resources/rewind-10-seconds.json");
+const ForwardAnimation = require("../../resources/forward-10-seconds.json");
 const DefaultCover = require("../../resources/ui_speaker.png");
 
 class FullPlayer extends Component {
   play = () => {
     this.props.play();
-    this.animation.play();
+    this.playPauseAnimation.play();
   };
 
   pause = () => {
     this.props.pause();
-    this.animation.play();
+    this.playPauseAnimation.play();
   };
 
   getAudioTimeString(seconds) {
@@ -33,6 +35,16 @@ class FullPlayer extends Component {
       .filter(Boolean)
       .join(":");
   }
+
+  rewind10Seconds = () => {
+    this.rewindAnimation.play();
+    this.props.rewind10Seconds();
+  };
+
+  forward10Seconds = () => {
+    this.forwardAnimation.play();
+    this.props.forward10Seconds();
+  };
 
   render() {
     const currentTimeString = this.getAudioTimeString(PlayerModel.currentTime);
@@ -80,21 +92,45 @@ class FullPlayer extends Component {
         <Text note style={{ alignSelf: "center", fontSize: 18 }}>
           {PlayerModel.currentSong.album || "Unknown Album"}
         </Text>
-        <TouchableOpacity
-          onPress={PlayerModel.playStatus == "PLAYING" ? this.pause : this.play}
-          style={{ alignItems: "center" }}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "center",
+            paddingHorizontal: "15%"
+          }}
         >
-          <LottieView
-            loop={false}
-            speed={PlayerModel.playStatus == "PLAYING" ? 1 : -1}
-            progress={PlayerModel.playStatus == "PLAYING" ? 1 : 0}
-            ref={animation => {
-              this.animation = animation;
-            }}
-            style={{ width: 100, height: 100 }}
-            source={AnimationData}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity onPress={this.rewind10Seconds}>
+            <LottieView
+              loop={false}
+              ref={animation => (this.rewindAnimation = animation)}
+              style={{ width: 60, height: 60 }}
+              source={RewindAnimation}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={
+              PlayerModel.playStatus == "PLAYING" ? this.pause : this.play
+            }
+          >
+            <LottieView
+              loop={false}
+              speed={PlayerModel.playStatus == "PLAYING" ? 1 : -1}
+              progress={PlayerModel.playStatus == "PLAYING" ? 1 : 0}
+              ref={animation => (this.playPauseAnimation = animation)}
+              style={{ width: 100, height: 100 }}
+              source={PlayPauseAnimation}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.forward10Seconds}>
+            <LottieView
+              loop={false}
+              ref={animation => (this.forwardAnimation = animation)}
+              style={{ width: 60, height: 60 }}
+              source={ForwardAnimation}
+            />
+          </TouchableOpacity>
+        </View>
         <View
           style={{
             marginVertical: 15,

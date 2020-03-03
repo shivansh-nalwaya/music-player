@@ -90,12 +90,12 @@ class Player extends Component {
     }
   };
 
-  jumpPrev15Seconds = () => {
-    this.jumpSeconds(-15);
+  rewind10Seconds = () => {
+    this.jumpSeconds(-10);
   };
 
-  jumpNext15Seconds = () => {
-    this.jumpSeconds(15);
+  forward10Seconds = () => {
+    this.jumpSeconds(10);
   };
 
   jumpSeconds = secsDelta => {
@@ -138,6 +138,8 @@ class Player extends Component {
           play={this.play}
           pause={this.pause}
           onSliderEditing={this.onSliderEditing}
+          rewind10Seconds={this.rewind10Seconds}
+          forward10Seconds={this.forward10Seconds}
           onPress={() => {
             this.drawer.closeDrawer();
             this.setState({ drawerCollapsed: true });

@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native";
 import PlayerModel from "../../models/player-model";
 import _ from "lodash";
 
-const AnimationData = require("../../resources/play-pause-animation.json");
+const PlayPauseAnimation = require("../../resources/play-pause.json");
 
 class MiniPlayer extends Component {
   play = () => {
@@ -49,7 +49,7 @@ class MiniPlayer extends Component {
               this.animation = animation;
             }}
             style={{ width: 68, height: 68, marginTop: "-10%" }}
-            source={AnimationData}
+            source={PlayPauseAnimation}
           />
         </TouchableOpacity>
       </TouchableOpacity>
