@@ -1,14 +1,14 @@
+import _ from "lodash";
 import {
   Body,
   Left,
   List,
   ListItem,
+  Right,
   Spinner,
   Text,
-  Thumbnail,
-  Right
+  Thumbnail
 } from "native-base";
-import _ from "lodash";
 import React, { Component } from "react";
 import { PermissionsAndroid, ScrollView } from "react-native";
 import MusicFiles from "react-native-get-music-files";
@@ -49,7 +49,10 @@ class Home extends Component {
   render() {
     return (
       <ScrollView
-        contentContainerStyle={{ backgroundColor: "#151515", height: "100%" }}
+        contentContainerStyle={{
+          backgroundColor: "#151515",
+          minHeight: "100%"
+        }}
       >
         {this.state.loading && <Spinner color="orange" />}
         <List>

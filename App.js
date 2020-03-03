@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Router, Stack, Scene } from "react-native-router-flux";
-import { Home } from "./src/pages";
-import PlayerComponent from "./src/components/player";
 import { Container, Drawer } from "native-base";
-import Header from "./src/components/header";
+import React, { Component } from "react";
+import { Router, Scene, Stack } from "react-native-router-flux";
 import CustomDrawer from "./src/components/custom-drawer";
+import Header from "./src/components/header";
+import PlayerComponent from "./src/components/player";
+import { Home } from "./src/pages";
 
 class App extends Component {
   openDrawer = () => {
