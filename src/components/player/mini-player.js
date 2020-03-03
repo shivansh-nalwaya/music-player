@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native";
 import PlayerModel from "../../models/player-model";
 import _ from "lodash";
 
-const AnimationData = require("../../resources/animation.json");
+const AnimationData = require("../../resources/play-pause-animation.json");
 
 class MiniPlayer extends Component {
   play = () => {

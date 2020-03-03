@@ -6,7 +6,7 @@ import React, { Component } from "react";
 import { Image, Platform, TouchableOpacity, StyleSheet } from "react-native";
 import PlayerModel from "../../models/player-model";
 
-const AnimationData = require("../../resources/animation.json");
+const AnimationData = require("../../resources/play-pause-animation.json");
 const DefaultCover = require("../../resources/ui_speaker.png");
 
 class FullPlayer extends Component {
