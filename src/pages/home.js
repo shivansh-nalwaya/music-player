@@ -31,7 +31,8 @@ class Home extends Component {
       .join(":");
   }
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     PermissionsAndroid.requestMultiple([
       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
