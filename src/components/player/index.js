@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { View, Icon, Text } from "native-base";
 import React, { Component } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, BackHandler } from "react-native";
 import Sound from "react-native-sound";
 import PlayerModel from "../../models/player-model";
 import BottomDrawer from "../bottom-drawer";
@@ -10,6 +10,32 @@ import MiniPlayer from "./mini-player";
 
 class Player extends Component {
   state = { drawerCollapsed: true };
+
+  constructor(props) {
+    super(props);
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener(
+      "hardwareBackPress",
+      this.handleBackButtonClick
+    );
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener(
+      "hardwareBackPress",
+      this.handleBackButtonClick
+    );
+  }
+
+  handleBackButtonClick() {
+    if (!this.state.drawerCollapsed) {
+      this.drawer.closeDrawer();
+      this.setState({ drawerCollapsed: true });
+    }
+  }
 
   componentDidUpdate() {
     if (PlayerModel.playStatus == "STOPPED") {
@@ -155,7 +181,7 @@ class Player extends Component {
                 PlayerModel.playStatus = "STOPPED";
                 PlayerModel.currentSong = null;
                 PlayerModel.currentTime = 0;
-                this.props.pause();
+                this.pause();
               }}
             />
           </View>
