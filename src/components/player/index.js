@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
-import { View } from "native-base";
+import { View, Icon, Text } from "native-base";
 import React, { Component } from "react";
-import { Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import Sound from "react-native-sound";
 import PlayerModel from "../../models/player-model";
 import BottomDrawer from "../bottom-drawer";
@@ -124,7 +124,7 @@ class Player extends Component {
         onExpanded={() => this.setState({ drawerCollapsed: false })}
         onCollapsed={() => this.setState({ drawerCollapsed: true })}
       >
-        {this.state.drawerCollapsed && (
+        {this.state.drawerCollapsed ? (
           <MiniPlayer
             play={this.play}
             pause={this.pause}
@@ -133,6 +133,32 @@ class Player extends Component {
               this.setState({ drawerCollapsed: false });
             }}
           />
+        ) : (
+          <View style={styles.container}>
+            <Icon
+              name="arrow-left"
+              type="FontAwesome5"
+              style={styles.icon}
+              onPress={() => {
+                this.drawer.closeDrawer();
+                this.setState({ drawerCollapsed: true });
+              }}
+            />
+            <Text style={styles.text}>Now Playing</Text>
+            <Icon
+              name="times"
+              type="FontAwesome5"
+              style={styles.icon}
+              onPress={() => {
+                this.drawer.closeDrawer();
+                this.setState({ drawerCollapsed: true });
+                PlayerModel.playStatus = "STOPPED";
+                PlayerModel.currentSong = null;
+                PlayerModel.currentTime = 0;
+                this.props.pause();
+              }}
+            />
+          </View>
         )}
         <FullPlayer
           play={this.play}
@@ -140,14 +166,33 @@ class Player extends Component {
           onSliderEditing={this.onSliderEditing}
           rewind10Seconds={this.rewind10Seconds}
           forward10Seconds={this.forward10Seconds}
-          onPress={() => {
-            this.drawer.closeDrawer();
-            this.setState({ drawerCollapsed: true });
-          }}
         />
       </BottomDrawer>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: "8%",
+    paddingHorizontal: "6%",
+    backgroundColor: "#292929",
+    display: "flex",
+    position: "absolute",
+    top: 0,
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  icon: {
+    color: "orange"
+  },
+  text: {
+    fontSize: 20,
+    textTransform: "uppercase",
+    color: "orange"
+  }
+});
 
 export default observer(Player);

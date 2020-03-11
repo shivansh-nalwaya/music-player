@@ -1,9 +1,9 @@
 import Slider from "@react-native-community/slider";
 import LottieView from "lottie-react-native";
 import { observer } from "mobx-react";
-import { Text, View, Icon } from "native-base";
+import { Text, View } from "native-base";
 import React, { Component } from "react";
-import { Image, Platform, TouchableOpacity, StyleSheet } from "react-native";
+import { Image, Platform, TouchableOpacity } from "react-native";
 import PlayerModel from "../../models/player-model";
 
 const PlayPauseAnimation = require("../../resources/play-pause.json");
@@ -56,27 +56,6 @@ class FullPlayer extends Component {
       : DefaultCover;
     return (
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <View style={styles.container}>
-          <Icon
-            name="arrow-left"
-            type="FontAwesome5"
-            style={styles.icon}
-            onPress={this.props.onPress}
-          />
-          <Text style={styles.text}>Now Playing</Text>
-          <Icon
-            name="times"
-            type="FontAwesome5"
-            style={styles.icon}
-            onPress={() => {
-              this.props.onPress();
-              PlayerModel.playStatus = "STOPPED";
-              PlayerModel.currentSong = null;
-              PlayerModel.currentTime = 0;
-              this.props.pause();
-            }}
-          />
-        </View>
         <Image
           source={coverImg}
           style={{
@@ -163,27 +142,6 @@ class FullPlayer extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    height: "8%",
-    paddingHorizontal: "6%",
-    backgroundColor: "#292929",
-    display: "flex",
-    position: "absolute",
-    top: 0,
-    flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  icon: {
-    color: "orange"
-  },
-  text: {
-    fontSize: 20,
-    textTransform: "uppercase",
-    color: "orange"
-  }
-});
+
 
 export default observer(FullPlayer);
