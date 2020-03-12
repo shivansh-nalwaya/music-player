@@ -26,7 +26,7 @@ class Header extends Component {
           name="bars"
           type="FontAwesome5"
           style={styles.icon}
-          onPress={this.props.openDrawer}
+          onPress={this.props.toggleDrawer}
         />
         <Text style={styles.text}>Home</Text>
         <Icon
