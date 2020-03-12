@@ -10,40 +10,17 @@ import {
   Thumbnail
 } from "native-base";
 import React, { Component } from "react";
-import { PermissionsAndroid, ScrollView } from "react-native";
-import MusicFiles from "react-native-get-music-files";
+import { ScrollView } from "react-native";
 import PlayerModel from "../models/player-model";
+import ReadMusicData from "../utils/read-music-data";
+import AudioTimeString from "../utils/audio-time-string";
 
 class Home extends Component {
   state = { loading: true, tracks: [] };
 
-  getAudioTimeString(seconds) {
-    const h = parseInt(seconds / (60 * 60));
-    const m = parseInt((seconds % (60 * 60)) / 60);
-    const s = parseInt(seconds % 60);
-
-    return [
-      h == 0 ? null : h < 10 ? "0" + h : h,
-      m < 10 ? "0" + m : m,
-      s < 10 ? "0" + s : s
-    ]
-      .filter(Boolean)
-      .join(":");
-  }
-
-  constructor(props) {
-    super(props);
-    PermissionsAndroid.requestMultiple([
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
-    ]).then(() => {
-      MusicFiles.getAll({ cover: true })
-        .then(tracks => {
-          this.setState({ tracks, loading: false });
-        })
-        .catch(error => {
-          console.log(error);
-        });
+  componentDidMount() {
+    ReadMusicData(tracks => {
+      this.setState({ tracks, loading: false });
     });
   }
 
@@ -82,9 +59,7 @@ class Home extends Component {
                 <Text note>{_.truncate(item.album || "Unknown album")}</Text>
               </Body>
               <Right>
-                <Text note>
-                  {this.getAudioTimeString(item.duration / 1000)}
-                </Text>
+                <Text note>{AudioTimeString(item.duration / 1000)}</Text>
               </Right>
             </ListItem>
           ))}

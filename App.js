@@ -1,10 +1,9 @@
 import { Container, Drawer } from "native-base";
 import React, { Component } from "react";
-import { Router, Scene, Stack } from "react-native-router-flux";
 import CustomDrawer from "./src/components/custom-drawer";
 import Header from "./src/components/header";
 import PlayerComponent from "./src/components/player";
-import { Home } from "./src/pages";
+import Pages from "./src/pages";
 
 class App extends Component {
   openDrawer = () => {
@@ -45,11 +44,7 @@ class App extends Component {
           }}
         >
           <Header openDrawer={this.openDrawer} closeDrawer={this.closeDrawer} />
-          <Router>
-            <Stack key="root" hideNavBar>
-              <Scene key="home" component={Home} />
-            </Stack>
-          </Router>
+          <Pages />
           <PlayerComponent />
         </Drawer>
       </Container>
