@@ -1,5 +1,9 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { DrawerActions, NavigationContainer } from "@react-navigation/native";
+import {
+  DrawerActions,
+  NavigationContainer,
+  DarkTheme
+} from "@react-navigation/native";
 import { Container } from "native-base";
 import React, { Component } from "react";
 import Header from "./src/components/header";
@@ -19,7 +23,7 @@ class App extends Component {
             navigationRef.current.dispatch(DrawerActions.toggleDrawer())
           }
         />
-        <NavigationContainer ref={navigationRef}>
+        <NavigationContainer theme={DarkTheme} ref={navigationRef}>
           <Navigator>
             <Screen name="Home" component={Home} />
           </Navigator>
