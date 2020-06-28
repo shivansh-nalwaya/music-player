@@ -7,7 +7,7 @@ import {
   Right,
   Spinner,
   Text,
-  Thumbnail
+  Thumbnail,
 } from "native-base";
 import React, { Component } from "react";
 import { ScrollView } from "react-native";
@@ -19,7 +19,8 @@ class Home extends Component {
   state = { loading: true, tracks: [] };
 
   componentDidMount() {
-    ReadMusicData(tracks => {
+    ReadMusicData((tracks) => {
+      if (!Array.isArray(tracks)) tracks = [];
       this.setState({ tracks, loading: false });
     });
   }
@@ -29,7 +30,7 @@ class Home extends Component {
       <ScrollView
         contentContainerStyle={{
           backgroundColor: "#151515",
-          minHeight: "100%"
+          minHeight: "100%",
         }}
       >
         {this.state.loading && <Spinner color="orange" />}
@@ -48,7 +49,7 @@ class Home extends Component {
                   source={{
                     uri:
                       item.cover ||
-                      "https://musicnotesbox.com/media/catalog/product/7/3/73993_image.png"
+                      "https://musicnotesbox.com/media/catalog/product/7/3/73993_image.png",
                   }}
                 />
               </Left>
